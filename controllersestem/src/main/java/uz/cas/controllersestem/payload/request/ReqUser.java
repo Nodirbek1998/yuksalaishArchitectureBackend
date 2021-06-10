@@ -1,11 +1,18 @@
-package uz.cas.controllersestem.payload;
+package uz.cas.controllersestem.payload.request;
+
+import javax.validation.constraints.NotBlank;
 
 public class ReqUser {
 
+    @NotBlank(message = "malumot kiritilmagan")
     private String firstName;
+    @NotBlank(message = "malumot kiritilmagan")
     private String lastName;
+    @NotBlank(message = "malumot kiritilmagan")
     private String username;
+    @NotBlank(message = "malumot kiritilmagan")
     private String password;
+    @NotBlank(message = "malumot kiritilmagan")
     private String job;
 
     public ReqUser() {

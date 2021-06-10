@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import uz.cas.controllersestem.payload.ReqLogin;
+import uz.cas.controllersestem.payload.request.ReqLogin;
 import uz.cas.controllersestem.service.UsersService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/uz/cas")
@@ -21,7 +23,7 @@ public class AuthController {
     private UsersService usersService;
 
     @PostMapping("/login")
-    public HttpEntity<?> login(@RequestBody ReqLogin reqLogin) {
+    public HttpEntity<?> login(@Valid  @RequestBody ReqLogin reqLogin){
         ResponseEntity<?> login = usersService.login(reqLogin);
         return ResponseEntity.ok(login);
     }

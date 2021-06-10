@@ -15,9 +15,9 @@ import java.io.IOException;
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        InvalidLoginResponse invalidLoginResponse = new InvalidLoginResponse();
+        InvalidLoginResponse invalidLoginResponse=new InvalidLoginResponse();
         invalidLoginResponse.setInvalid("username or password error!");
-        String jsonLoginResponse = new Gson().toJson(invalidLoginResponse);
+        String jsonLoginResponse=new Gson().toJson(invalidLoginResponse);
         httpServletResponse.setStatus(401);
         httpServletResponse.setContentType("application/json");
         httpServletResponse.getWriter().print(jsonLoginResponse);

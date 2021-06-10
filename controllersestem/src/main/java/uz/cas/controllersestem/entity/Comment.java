@@ -4,11 +4,12 @@ package uz.cas.controllersestem.entity;
 import uz.cas.controllersestem.entity.template.AbsEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 
 @Entity
-public class Comment extends AbsEntity {
+public class Comment extends AbsEntity{
 
     @ManyToOne
     private Users users;

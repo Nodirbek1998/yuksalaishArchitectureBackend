@@ -31,11 +31,11 @@ public class Project {
 
     private boolean projectMake;
 
+
+    private String document;
+
     @Enumerated(EnumType.STRING)
     private ProjectStatus projectStatus;
-
-    @ManyToMany
-    private List<Document> documents;
 
     public Project() {
     }
@@ -47,8 +47,8 @@ public class Project {
                    Date projectCreated,
                    Date projectFinished,
                    boolean projectMake,
-                   ProjectStatus projectStatus,
-                   List<Document> documents) {
+                   String document,
+                   ProjectStatus projectStatus) {
         this.projectName = projectName;
         this.usersList = usersList;
         this.projectManager = projectManager;
@@ -56,8 +56,8 @@ public class Project {
         this.projectCreated = projectCreated;
         this.projectFinished = projectFinished;
         this.projectMake = projectMake;
+        this.document = document;
         this.projectStatus = projectStatus;
-        this.documents = documents;
     }
 
     public String getProjectName() {
@@ -132,11 +132,12 @@ public class Project {
         this.projectStatus = projectStatus;
     }
 
-    public List<Document> getDocuments() {
-        return documents;
+    public String getDocument() {
+        return document;
     }
 
-    public void setDocuments(List<Document> documents) {
-        this.documents = documents;
+    public void setDocument(String document) {
+        this.document = document;
     }
+
 }

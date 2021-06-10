@@ -1,9 +1,13 @@
 package uz.cas.controllersestem.entity;
 
 
+import uz.cas.controllersestem.entity.enums.ProgressStatus;
+import uz.cas.controllersestem.entity.enums.ProjectStatus;
 import uz.cas.controllersestem.entity.template.AbsEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import java.util.UUID;
 
@@ -13,15 +17,16 @@ public class Progress extends AbsEntity {
     private float percent;
     @ManyToOne
     private Users users;
-
-    private boolean status;
+    @Enumerated(value = EnumType.STRING)
+    private ProgressStatus status;
     @ManyToOne
     private Project project;
+
 
     public Progress() {
     }
 
-    public Progress(float percent, Users users, boolean status, Project project) {
+    public Progress(float percent, Users users, ProgressStatus status, Project project) {
         this.percent = percent;
         this.users = users;
         this.status = status;
@@ -44,11 +49,11 @@ public class Progress extends AbsEntity {
         this.users = users;
     }
 
-    public boolean isStatus() {
+    public ProgressStatus getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(ProgressStatus status) {
         this.status = status;
     }
 

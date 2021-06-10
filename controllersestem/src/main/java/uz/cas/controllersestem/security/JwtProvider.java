@@ -27,12 +27,12 @@ public class JwtProvider {
     }
 
     public String generateToken(Authentication authentication) {
-        Users user = (Users) authentication.getPrincipal();
-        Date now = new Date(System.currentTimeMillis());
-        Date expireDate = new Date(now.getTime() + 3 * 24 * 60 * 60 * 1000);  // 1 days
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("role", user.getRoles());
-        claims.put("username", user.getUsername());
+        Users user=(Users) authentication.getPrincipal();
+        Date now=new Date(System.currentTimeMillis());
+        Date expireDate=new Date(now.getTime()+3*24*60*60*1000);  // 1 days
+        Map<String,Object> claims=new HashMap<>();
+        claims.put("role",user.getRoles());
+        claims.put("username",user.getUsername());
         return Jwts.builder()
                 .setSubject(user.getUsername())
                 .setClaims(claims)
@@ -41,7 +41,6 @@ public class JwtProvider {
                 .signWith(SignatureAlgorithm.HS256, JwtKey)
                 .compact();
     }
-
     public boolean isValidToken(String token) {
         try {
             Jwts.parser()
@@ -62,6 +61,7 @@ public class JwtProvider {
         setUsername(username.get("username").toString());
         return String.valueOf(username.get("username"));
     }
+
 
 
 }

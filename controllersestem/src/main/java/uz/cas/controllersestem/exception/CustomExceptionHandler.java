@@ -28,15 +28,15 @@ public class CustomExceptionHandler {
     }
 
     @ExceptionHandler
-    public final ResponseEntity<?> handlePasswordException(PasswordNotMatchException exception, WebRequest request) {
+    public final ResponseEntity<?> handlePasswordException(PasswordNotMatchException exception, WebRequest request){
 
-        PasswordExceptionResponse exceptionResponse = new PasswordExceptionResponse(exception.getMessage());
+        PasswordExceptionResponse exceptionResponse=new PasswordExceptionResponse(exception.getMessage());
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
-    public final ResponseEntity<?> handleUsernameException(UsernameException exception, WebRequest request) {
-        UsernameExceptionResponse exceptionResponse = new UsernameExceptionResponse(exception.getMessage());
+    public final ResponseEntity<?> handleUsernameException(UsernameException exception, WebRequest request){
+        UsernameExceptionResponse exceptionResponse=new UsernameExceptionResponse(exception.getMessage());
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 

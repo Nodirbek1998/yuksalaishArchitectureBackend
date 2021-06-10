@@ -5,11 +5,12 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import uz.cas.controllersestem.payload.ReqGetPercent;
-import uz.cas.controllersestem.payload.ReqProgress;
-import uz.cas.controllersestem.repository.ProgressRepository;
+import uz.cas.controllersestem.payload.request.ReqActivePercent;
+import uz.cas.controllersestem.payload.request.ReqGetPercent;
+import uz.cas.controllersestem.payload.request.ReqProgress;
 import uz.cas.controllersestem.service.ProgressService;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @Controller
@@ -18,32 +19,32 @@ public class ProgressController {
 
     @Autowired
     private ProgressService progressService;
-    @Autowired
-    private ProgressRepository progressRepository;
-
     @PostMapping
-    public HttpEntity<?> addProgress(@RequestBody ReqProgress reqProgress) {
+    public HttpEntity<?> addProgress(@Valid  @RequestBody ReqProgress reqProgress){
         return ResponseEntity.ok(progressService.addProgress(reqProgress));
     }
 
     @PostMapping("/{id}")
-    public HttpEntity<?> editProgress(@PathVariable UUID id, @RequestBody ReqProgress reqProgress) {
+    public HttpEntity<?> editProgress(@PathVariable UUID id, @Valid  @RequestBody ReqProgress reqProgress){
         return ResponseEntity.ok(progressService.editProgress(id, reqProgress));
     }
 
-    @GetMapping("/add/{id}")
-    public HttpEntity<?> pushProgress(@PathVariable UUID id) {
-        return ResponseEntity.ok(progressService.progressActive(id));
+    @PostMapping("/add/{id}")
+    public HttpEntity<?> pushProgress(@PathVariable UUID id, @RequestBody ReqActivePercent reqActivePercent){
+        return ResponseEntity.ok(progressService.progressActive(id, reqActivePercent));
     }
-
     @PostMapping("/getPercent")
-    public HttpEntity<?> getPercent(@RequestBody ReqGetPercent reqGetPercent) {
-        return ResponseEntity.ok(progressService.getPercent(reqGetPercent));
-    }
-
-    @PostMapping("/disabledProgress")
-    public HttpEntity<?> disabledProgress(@RequestBody ReqGetPercent reqGetPercent) {
+    public HttpEntity<?> getPercent(@RequestBody ReqGetPercent reqGetPercent){
         return ResponseEntity.ok(progressService.getPercentGIP(reqGetPercent));
+    }
+    @PostMapping("/disabledProgress")
+    public HttpEntity<?> disabledProgress(@Valid @RequestBody ReqGetPercent reqGetPercent){
+        return ResponseEntity.ok(progressService.getPercentGIP(reqGetPercent));
+    }
+    @DeleteMapping("/{id}")
+    public HttpEntity<?> deleteProgress(@PathVariable UUID id){
+        return ResponseEntity.ok(progressService.deleteProgress(id));
+
     }
 
 }
