@@ -37,13 +37,9 @@ private RoleRepository roleRepository;
     @Override
     public void run(String... args) throws Exception {
 
-        if (modeInitial.equals("always")){
+        if (modeInitial.equals("always")) {
             roleRepository.save(new Role(RoleName.admin));
             roleRepository.save(new Role(RoleName.user));
-            roleRepository.save(new Role(RoleName.gip));
-            roleRepository.save(new Role(RoleName.gip1));
-            roleRepository.save(new Role(RoleName.proRector));
-            roleRepository.save(new Role(RoleName.gip2));
             roleRepository.save(new Role(RoleName.projectControl));
             HashSet<Role> roles = new HashSet<>(roleRepository.findAll());
 
@@ -66,42 +62,7 @@ private RoleRepository roleRepository;
                     "proRector",
                     roles.stream().filter(role -> role.getRoleName().name()
                             .equals("proRector")).collect(Collectors.toSet())));
-            usersRepository.save(new Users(
-                    "Kamola",
-                    "Tursunova",
-                    "kamola",
-                    passwordEncoder.encode("1234"),
-                    "1234",
-                    "Kotiba",
-                    roles.stream().filter(role -> role.getRoleName().name()
-                            .equals("projectControl")).collect(Collectors.toSet())));
-            usersRepository.save(new Users(
-                    "Hasan",
-                    "Ochilov",
-                    "hasan",
-                    passwordEncoder.encode("1234"),
-                    "1234",
-                    "Gip",
-                    roles.stream().filter(role -> role.getRoleName().name()
-                            .equals("gip")).collect(Collectors.toSet())));
-            usersRepository.save(new Users(
-                    "Muslimjon",
-                    "Samatov",
-                    "muslim",
-                    passwordEncoder.encode("1234"),
-                    "1234",
-                    "Gip",
-                    roles.stream().filter(role -> role.getRoleName().name()
-                            .equals("gip1")).collect(Collectors.toSet())));
-            usersRepository.save(new Users(
-                    "Amirshox",
-                    "Axmedov",
-                    "amirshox",
-                    passwordEncoder.encode("1234"),
-                    "1234",
-                    "Gip",
-                    roles.stream().filter(role -> role.getRoleName().name()
-                            .equals("gip2")).collect(Collectors.toSet())));
+
         }
     }
 }
